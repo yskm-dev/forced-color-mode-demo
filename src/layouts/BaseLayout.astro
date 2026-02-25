@@ -1,0 +1,48 @@
+---
+import "../styles/global.scss";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Forced Color Mode Demo - yskm_dev",
+  description = "Windowsの強制カラーモード（forced-colors）で壊れるUIと壊れないUIの比較デモ",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="forced-colors-active-banner" role="status" aria-live="polite">
+      <span class="forced-colors-active-banner__inactive">
+        強制カラーモードが無効です — 有効にするとデモの効果が確認できます
+      </span>
+      <span class="forced-colors-active-banner__active">
+        ✓ 強制カラーモードが有効です — デモの効果を確認できます
+      </span>
+    </div>
+    <slot />
+    <div class="breadcrumb">
+      <ul class="breadcrumb__list">
+        <li>
+          <a href="https://yskm.dev/">yskm_dev</a>
+        </li>
+        <li>
+          <a href="https://yskm.dev/sketch">sketch</a>
+        </li>
+        <li>
+          <span>Forced Color Mode Demo</span>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

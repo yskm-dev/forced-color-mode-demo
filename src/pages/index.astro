@@ -1,0 +1,72 @@
+---
+import ComparisonSection from "../components/ComparisonSection.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import HowToEnable from "../components/HowToEnable.astro";
+import Nav from "../components/Nav.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import ButtonBadUI from "../components/cases/ButtonBadUI.astro";
+import ButtonGoodUI from "../components/cases/ButtonGoodUI.astro";
+import DrawerBadUI from "../components/cases/DrawerBadUI.astro";
+import DrawerGoodUI from "../components/cases/DrawerGoodUI.astro";
+import IconBtnBadUI from "../components/cases/IconBtnBadUI.astro";
+import IconBtnGoodUI from "../components/cases/IconBtnGoodUI.astro";
+import RadioBadUI from "../components/cases/RadioBadUI.astro";
+import RadioGoodUI from "../components/cases/RadioGoodUI.astro";
+---
+
+<BaseLayout>
+  <Header />
+  <Nav />
+
+  <main>
+    <HowToEnable />
+
+    <ComparisonSection
+      caseNumber={1}
+      title="ラジオボタンの選択状態"
+      description="ラジオボタンをCSSで装飾した際に、選択状態が可視化されないことがあります。"
+      badExplanation="選択状態をbackground-colorの変化だけで表現していると、強制カラーモードで全てが同じ ButtonFace色になり、どれが選択されているかわからなくなります。"
+      goodExplanation="選択状態に border: 2px solid transparent を追加するだけで、強制カラーモードで ButtonText 色の境界線が現れ、選択状態が明確になります。"
+    >
+      <RadioBadUI slot="bad" />
+      <RadioGoodUI slot="good" />
+    </ComparisonSection>
+
+    <ComparisonSection
+      caseNumber={2}
+      title="ドロワーの境界線"
+      description="ドロワーの境界を box-shadow だけで表現すると、強制カラーモードで影が消えて境界がわからなくなることがあります。"
+      badExplanation="box-shadowは強制カラーモードで無効化されます。ドロワーの境界線が視覚的に認識しにくくなります。"
+      goodExplanation="border-left: 1px solid transparent を追加すると、強制カラーモード時に currentColor の境界線が現れ、ドロワーとページの境界が明確になります。"
+    >
+      <DrawerBadUI slot="bad" />
+      <DrawerGoodUI slot="good" />
+    </ComparisonSection>
+
+    <ComparisonSection
+      caseNumber={3}
+      title="ボタンの優先度表現"
+      description="ボタンの優先度（プライマリ・セカンダリ）を色だけで表現すると、強制カラーモードで意図しない見た目になり、ユーザーにとってどのアクションが重要かわからなくなります。"
+      badExplanation="色の違いだけでボタンの優先度を伝えています。強制カラーモードでは プライマリの背景色が ButtonFace で統一され、ボタンの形がわからなくなり、優先度が低く見えてしまいます。"
+      goodExplanation="プライマリボタンに border: 5px double transparent を追加することで、強制カラーモードで ButtonText 色のダブルボーダーが現れ、ボタンの強調が視覚的に際立ちます。"
+    >
+      <ButtonBadUI slot="bad" />
+      <ButtonGoodUI slot="good" />
+    </ComparisonSection>
+
+    <ComparisonSection
+      caseNumber={4}
+      title="アイコン付きボタン"
+      description="ボタンのアイコン色によっては、強制カラーモードでアイコンが見えづらくなってしまうことがあります。"
+      badExplanation="SVGの色が fill や stroke で指定されている場合、強制カラーモードで背景色と同化してアイコンが見えなくなることがあります。"
+      goodExplanation="インライン SVG で stroke='currentColor' を使うことで、強制カラーモードでも ButtonText 色が継承され、アイコンが常に表示されます。"
+    >
+      <IconBtnBadUI slot="bad" />
+      <IconBtnGoodUI slot="good" />
+    </ComparisonSection>
+  </main>
+
+  <Footer />
+</BaseLayout>

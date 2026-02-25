@@ -1,0 +1,157 @@
+@use './variables' as *;
+@use './mixins' as *;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
+
+// ===========================
+// Reset
+// ===========================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// ===========================
+// Base
+// ===========================
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc($nav-height + $space-md);
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text;
+  background-color: $color-bg;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: $line-height-tight;
+  font-weight: $font-weight-bold;
+}
+
+a {
+  color: $color-primary;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+// ===========================
+// Utility classes
+// ===========================
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.container {
+  @include container;
+}
+
+// ===========================
+// Forced-colors active banner
+// ===========================
+.forced-colors-active-banner {
+  display: block;
+  position: fixed;
+  width: fit-content;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 5px;
+  z-index: $z-banner;
+  padding: $space-sm $space-md;
+  text-align: center;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  border: 1px solid #f59e0b;
+  background: #fffbeb;
+  color: #92400e;
+
+  &__active {
+    display: none;
+  }
+
+  &__inactive {
+    display: block;
+  }
+
+  @media (forced-colors: active) {
+    background: #000;
+    border: 1px solid currentColor;
+    color: inherit;
+
+    .forced-colors-active-banner__inactive {
+      display: none;
+    }
+
+    .forced-colors-active-banner__active {
+      display: block;
+    }
+  }
+}
+
+:focus-visible {
+  outline: 3px solid $color-primary;
+  outline-offset: 2px;
+}
+
+button {
+  appearance: none;
+  border: none;
+}
+
+.breadcrumb {
+  position: absolute;
+  top: $space-md;
+  left: $space-md;
+  display: flex;
+}
+
+.breadcrumb__list {
+  display: flex;
+  gap: $space-sm;
+  font-size: $font-size-sm;
+
+  li {
+    &::after {
+      content: '/';
+      color: $color-secondary;
+      font-size: $font-size-sm;
+      margin-left: $space-sm;
+    }
+    &:last-child::after {
+      content: '';
+    }
+  }
+  a {
+    color: $color-primary;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  span {
+    color: $color-secondary;
+  }
+}

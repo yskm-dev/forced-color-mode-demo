@@ -1,0 +1,182 @@
+---
+
+---
+
+<div class="drawer-bad-demo">
+  <button
+    class="drawer-bad__trigger"
+    id="drawer-bad-trigger"
+    aria-expanded="false"
+    aria-controls="drawer-bad-panel"
+  >
+    メニューを開く
+  </button>
+  <dialog
+    class="drawer-bad"
+    id="drawer-bad-panel"
+    aria-label="ナビゲーションメニュー（Bad UI）"
+    aria-modal="true"
+  >
+    <div class="drawer-bad__header">
+      <h3 class="drawer-bad__title">メニュー</h3>
+      <button
+        class="drawer-bad__close"
+        id="drawer-bad-close"
+        aria-label="メニューを閉じる">✕</button
+      >
+    </div>
+    <nav>
+      <ul class="drawer-bad__nav" role="list">
+        <li>
+          <a href="#how-to-enable" class="drawer-bad__nav-item">有効化手順</a>
+        </li>
+        <li>
+          <a href="#case-1" class="drawer-bad__nav-item">Case1:ラジオボタン</a>
+        </li>
+        <li>
+          <a href="#case-2" class="drawer-bad__nav-item">Case2:ドロワー</a>
+        </li>
+        <li>
+          <a href="#case-3" class="drawer-bad__nav-item">Case3:ボタン優先度</a>
+        </li>
+        <li>
+          <a href="#case-4" class="drawer-bad__nav-item"
+            >Case4:アイコン付きボタン</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </dialog>
+</div>
+
+<script>
+  function initDrawerBad() {
+    const trigger = document.getElementById(
+      "drawer-bad-trigger",
+    ) as HTMLButtonElement;
+    const panel = document.getElementById(
+      "drawer-bad-panel",
+    ) as HTMLDialogElement;
+    const closeBtn = document.getElementById("drawer-bad-close");
+
+    if (!trigger || !panel || !closeBtn) return;
+
+    function open() {
+      panel.showModal();
+      trigger?.setAttribute("aria-expanded", "true");
+    }
+
+    function close() {
+      panel.close();
+      trigger?.setAttribute("aria-expanded", "false");
+    }
+
+    trigger.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+    panel.addEventListener("click", (e) => {
+      if (e.target === panel) close();
+    });
+  }
+
+  initDrawerBad();
+</script>
+
+<style lang="scss">
+  .drawer-bad-demo {
+    position: relative;
+  }
+
+  .drawer-bad-scene {
+    position: relative;
+  }
+
+  .drawer-bad__trigger {
+    @include button-reset;
+    background-color: $color-primary;
+    color: $color-text-on-primary;
+    padding: $space-sm $space-lg;
+    border-radius: $border-radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $space-md;
+    border: 1px solid transparent;
+  }
+
+  .drawer-bad {
+    top: 0;
+    right: 0;
+    left: auto;
+    height: 100%;
+    max-height: 100%;
+    border: none;
+    bottom: 0;
+    width: 280px;
+    z-index: $z-drawer;
+    background-color: $color-bg;
+    padding: $space-lg;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    visibility: visible;
+
+    // Bad: box-shadow のみで境界を表現
+    box-shadow: -8px 0 24px $color-shadow;
+
+    &[open] {
+      transform: translateX(0);
+    }
+
+    &::backdrop {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    // 強制カラーモードでは box-shadow が消えてドロワーとページの境界が
+    // わからなくなる可能性がある（テーマによっては背景色が同じになる）
+  }
+
+  .drawer-bad__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $space-lg;
+    padding-bottom: $space-md;
+    border-bottom: 1px solid $color-border;
+  }
+
+  .drawer-bad__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+  }
+
+  .drawer-bad__close {
+    @include button-reset;
+    width: 32px;
+    height: 32px;
+    border-radius: $border-radius-full;
+    color: $color-text-muted;
+    font-size: $font-size-base;
+
+    &:hover {
+      background-color: $color-surface;
+    }
+  }
+
+  .drawer-bad__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .drawer-bad__nav-item {
+    display: block;
+    padding: $space-sm $space-md;
+    color: $color-text;
+    text-decoration: none;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-base;
+
+    &:hover {
+      background-color: $color-surface;
+      text-decoration: none;
+    }
+  }
+</style>

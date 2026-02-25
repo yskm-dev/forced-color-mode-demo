@@ -1,3 +1,14 @@
-.history
+# macOS
 .DS_Store
-node_modules
+
+# VS Code Local History
+.history
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Astro generated files
+.astro/

@@ -1,0 +1,80 @@
+---
+
+---
+
+<div class="button-good-demo">
+  <p class="button-good-demo__label">アクション選択</p>
+  <div class="button-good-demo__group">
+    <button class="btn-good btn-good--primary"> 保存する </button>
+    <button class="btn-good btn-good--secondary"> 下書き保存 </button>
+  </div>
+  <p class="button-good-demo__note">
+    強制カラーモードでもプライマリボタンを識別できます
+  </p>
+</div>
+
+<style lang="scss">
+  .button-good-demo {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+  }
+
+  .button-good-demo__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+  }
+
+  .button-good-demo__group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-sm;
+    align-items: center;
+  }
+
+  .button-good-demo__note {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    font-style: italic;
+  }
+
+  .btn-good {
+    @include button-reset;
+    padding: $space-sm $space-lg;
+    border-radius: $border-radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+  }
+
+  .btn-good--primary {
+    background-color: $color-primary;
+    color: $color-text-on-primary;
+    border: 5px double transparent;
+
+    &:hover {
+      background-color: $color-primary-dark;
+    }
+  }
+
+  .btn-good--secondary {
+    padding-block: calc($space-sm + 4px);
+    background-color: $color-surface;
+    color: $color-text;
+    border: 1px solid $color-border;
+
+    &:hover {
+      background-color: $color-surface-alt;
+    }
+  }
+
+  .btn-good--tertiary {
+    background-color: transparent;
+    color: $color-text-muted;
+
+    &:hover {
+      background-color: $color-surface;
+      color: $color-text;
+    }
+  }
+</style>

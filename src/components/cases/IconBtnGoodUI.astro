@@ -1,0 +1,90 @@
+---
+
+---
+
+<div class="icon-btn-good-demo">
+  <div class="icon-btn-good-demo__group">
+    <button class="icon-btn-good">
+      次へ進む
+      <svg
+        class="icon-btn-good__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d="M6 3l5 5-5 5"></path>
+      </svg>
+    </button>
+  </div>
+  <p class="icon-btn-good-demo__note">
+    インライン SVG に currentColor を使うことで、強制カラーモードでもアイコンが
+    ButtonText 色で表示されます。
+  </p>
+</div>
+
+<style lang="scss">
+  .icon-btn-good-demo {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+  }
+
+  .icon-btn-good-demo__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+  }
+
+  .icon-btn-good-demo__group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-sm;
+    align-items: center;
+  }
+
+  .icon-btn-good-demo__note {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    font-style: italic;
+  }
+
+  .icon-btn-good {
+    @include button-reset;
+    position: relative;
+    // 右側にアイコン分の余白: 12px(右端) + 16px(icon) + 8px(gap) = 36px
+    padding: $space-sm 36px $space-sm $space-md;
+    border-radius: $border-radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    background-color: $color-bg;
+    color: $color-text;
+    border: 1px solid $color-border;
+
+    &:hover {
+      background-color: $color-surface;
+    }
+
+    svg {
+      display: block;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // Good: stroke="currentColor" のため、forced-colors で自動的に ButtonText になる
+  .icon-btn-good__icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+</style>

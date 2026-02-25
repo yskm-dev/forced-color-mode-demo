@@ -1,0 +1,129 @@
+---
+const options = [
+  {
+    id: "bad-radio-1",
+    value: "option1",
+    label: "標準プラン",
+    description: "月額 ¥980",
+  },
+  {
+    id: "bad-radio-2",
+    value: "option2",
+    label: "プレミアムプラン",
+    description: "月額 ¥1,980",
+    checked: true,
+  },
+  {
+    id: "bad-radio-3",
+    value: "option3",
+    label: "エンタープライズ",
+    description: "月額 ¥4,980",
+  },
+];
+---
+
+<fieldset class="radio-bad">
+  <legend class="radio-bad__legend">プランを選択</legend>
+  {
+    options.map((option) => (
+      <label class={"radio-bad__item" + (option.checked ? " is-checked" : "")}>
+        <input
+          class="radio-bad__input"
+          type="radio"
+          name="plan-bad"
+          value={option.value}
+          checked={option.checked}
+        />
+        <span class="radio-bad__mark" aria-hidden="true" />
+        <span class="radio-bad__label-text">
+          <span class="radio-bad__label-name">{option.label}</span>
+          <span class="radio-bad__label-desc">{option.description}</span>
+        </span>
+      </label>
+    ))
+  }
+</fieldset>
+
+<script></script>
+
+<style lang="scss">
+  .radio-bad {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+
+  .radio-bad__legend {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+    margin-bottom: $space-sm;
+  }
+
+  .radio-bad__item {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    padding: $space-sm $space-md;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+
+    &:hover:not(:has(.radio-bad__input:checked)) {
+      background-color: $color-surface;
+    }
+  }
+
+  // bad: background-color + border-color で選択状態を表現
+  .radio-bad__item:has(.radio-bad__input:checked) {
+    background-color: $color-selected-bg;
+  }
+
+  .radio-bad__item:has(.radio-bad__input:checked:focus-visible) {
+    outline: 2px solid $color-primary;
+    outline-offset: 4px;
+  }
+
+  .radio-bad__input {
+    @include visually-hidden;
+  }
+
+  // カスタム円: 外輪 border は forced-colors で ButtonText に変わるため残る
+  .radio-bad__mark {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid $color-border-dark;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  // 内側ドット: background-color + transparent border（bad）
+  // forced-colors では border が ButtonText になり → 輪郭として残り選択状態が伝わる
+  .radio-bad__item:has(.radio-bad__input:checked) .radio-bad__mark::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background-color: $color-primary;
+  }
+
+  .radio-bad__label-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .radio-bad__label-name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+  }
+
+  .radio-bad__label-desc {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+</style>

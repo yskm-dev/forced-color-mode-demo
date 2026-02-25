@@ -1,0 +1,233 @@
+---
+
+---
+
+<section id="how-to-enable" class="how-to-enable">
+  <div class="container">
+    <h2 class="section-title">強制カラーモードの有効化手順</h2>
+    <p class="section-lead">
+      このデモはOSレベルで強制カラーモードを有効にするか、Chrome DevTools
+      でエミュレートして確認します。
+    </p>
+
+    <div class="how-to-enable__grid">
+      <!-- Windows -->
+      <div class="how-to-enable__card how-to-enable__card--recommended">
+        <div class="how-to-enable__card-header">
+          <span class="how-to-enable__platform-icon" aria-hidden="true">🪟</span
+          >
+          <h3 class="how-to-enable__platform-title">Windows</h3>
+          <!-- <span class="how-to-enable__badge how-to-enable__badge--recommended"
+            >推奨</span
+          > -->
+        </div>
+        <ol class="how-to-enable__steps">
+          <li>設定 → アクセシビリティ → コントラストテーマ</li>
+          <li>スタイルのいずれかを選択</li>
+          <li>「適用」ボタンをクリック</li>
+        </ol>
+        <p class="how-to-enable__shortcut">
+          ショートカット: <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd
+            >PrintScreen</kbd
+          >
+        </p>
+      </div>
+
+      <!-- Chrome DevTools -->
+      <div class="how-to-enable__card">
+        <div class="how-to-enable__card-header">
+          <span class="how-to-enable__platform-icon" aria-hidden="true">🔧</span
+          >
+          <h3 class="how-to-enable__platform-title">Chrome DevTools</h3>
+        </div>
+        <ol class="how-to-enable__steps">
+          <li><kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>I</kbd> で DevTools を開く</li>
+          <li>
+            <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>P</kbd> で<b
+              >Emulate CSS media feature forced-colors</b
+            >または<b>CSS forced-colorsをエミュレートする</b>を実行する
+          </li>
+        </ol>
+        <p class="how-to-enable__note">
+          ページリロードなしで即座に切り替わります
+        </p>
+      </div>
+
+      <!-- macOS -->
+      <div class="how-to-enable__card how-to-enable__card--not-recommended">
+        <div class="how-to-enable__card-header">
+          <span class="how-to-enable__platform-icon" aria-hidden="true">🍎</span
+          >
+          <h3 class="how-to-enable__platform-title">macOS</h3>
+          <!-- <span class="how-to-enable__badge how-to-enable__badge--warning"
+            >非推奨</span
+          > -->
+        </div>
+        <p class="how-to-enable__description">
+          macOS の「コントラストを上げる」はアクセシビリティ設定にありますが、
+          <code>forced-colors</code> メディアクエリには対応していません。
+        </p>
+        <p class="how-to-enable__note">
+          → Chrome DevTools のエミュレーションをご利用ください
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .how-to-enable {
+    padding: $space-3xl 0;
+
+    .section-title {
+      font-size: $font-size-2xl;
+      margin-bottom: $space-sm;
+    }
+
+    .section-lead {
+      color: $color-text-muted;
+      margin-bottom: $space-xl;
+    }
+  }
+
+  .how-to-enable__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $space-md;
+  }
+
+  .how-to-enable__card {
+    @include card;
+    position: relative;
+  }
+
+  .how-to-enable__card--recommended {
+    border-color: $color-primary;
+    border-width: 2px;
+  }
+
+  .how-to-enable__card--not-recommended {
+    opacity: 0.8;
+  }
+
+  @media (forced-colors: active) {
+    .how-to-enable__card {
+      border: 1px solid ButtonText;
+    }
+
+    .how-to-enable__card--recommended {
+      border: 2px solid Highlight;
+    }
+  }
+
+  .how-to-enable__card-header {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    margin-bottom: $space-md;
+    flex-wrap: wrap;
+  }
+
+  .how-to-enable__platform-icon {
+    font-size: $font-size-xl;
+    line-height: 1;
+  }
+
+  .how-to-enable__platform-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    flex: 1;
+  }
+
+  .how-to-enable__badge {
+    display: inline-block;
+    padding: 2px $space-sm;
+    border-radius: $border-radius-full;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+  }
+
+  .how-to-enable__badge--recommended {
+    background-color: $color-badge-good-bg;
+    color: $color-badge-good-text;
+  }
+
+  .how-to-enable__badge--warning {
+    background-color: $color-surface-alt;
+    color: $color-text-muted;
+  }
+
+  @media (forced-colors: active) {
+    .how-to-enable__badge {
+      border: 1px solid ButtonText;
+      background-color: Canvas;
+      color: CanvasText;
+    }
+  }
+
+  .how-to-enable__steps {
+    list-style: decimal;
+    padding-left: $space-lg;
+    margin-bottom: $space-md;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+
+    li {
+      font-size: $font-size-sm;
+      line-height: $line-height-base;
+    }
+  }
+
+  .how-to-enable__shortcut {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    margin-top: $space-sm;
+  }
+
+  .how-to-enable__description {
+    font-size: $font-size-sm;
+    line-height: $line-height-base;
+    color: $color-text-muted;
+    margin-bottom: $space-sm;
+  }
+
+  .how-to-enable__note {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    font-style: italic;
+  }
+
+  kbd {
+    display: inline-block;
+    padding: 1px 5px;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    background-color: $color-surface-alt;
+    border: 1px solid $color-border-dark;
+    border-radius: $border-radius-sm;
+    box-shadow: 0 1px 0 $color-border-dark;
+
+    @media (forced-colors: active) {
+      background-color: ButtonFace;
+      color: ButtonText;
+      border: 1px solid ButtonText;
+      box-shadow: none;
+    }
+  }
+
+  code {
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    background-color: $color-surface-alt;
+    padding: 1px $space-xs;
+    border-radius: $border-radius-sm;
+    border: 1px solid $color-border;
+
+    @media (forced-colors: active) {
+      background-color: Canvas;
+      color: CanvasText;
+      border: 1px solid ButtonText;
+    }
+  }
+</style>

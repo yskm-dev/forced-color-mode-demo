@@ -1,0 +1,68 @@
+---
+
+---
+
+<div class="button-bad-demo">
+  <p class="button-bad-demo__label">アクション選択</p>
+  <div class="button-bad-demo__group">
+    <button class="btn-bad btn-bad--primary"> 保存する </button>
+    <button class="btn-bad btn-bad--secondary"> 下書き保存 </button>
+  </div>
+  <p class="button-bad-demo__note">
+    強制カラーモードでは2つのボタンの強弱の区別がつかなくなります。
+  </p>
+</div>
+
+<style lang="scss">
+  .button-bad-demo {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+  }
+
+  .button-bad-demo__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+  }
+
+  .button-bad-demo__group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-sm;
+    align-items: center;
+  }
+
+  .button-bad-demo__note {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    font-style: italic;
+  }
+
+  .btn-bad {
+    @include button-reset;
+    padding: calc($space-sm + 5px) $space-lg;
+    border-radius: $border-radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+  }
+
+  .btn-bad--primary {
+    background-color: $color-primary;
+    color: $color-text-on-primary;
+
+    &:hover {
+      background-color: $color-primary-dark;
+    }
+  }
+
+  .btn-bad--secondary {
+    background-color: $color-surface;
+    color: $color-text;
+    border: 1px solid $color-border;
+
+    &:hover {
+      background-color: $color-surface-alt;
+    }
+  }
+</style>

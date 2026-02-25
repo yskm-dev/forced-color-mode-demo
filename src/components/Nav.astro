@@ -1,0 +1,79 @@
+---
+const navItems = [
+  { href: "#how-to-enable", label: "有効化手順" },
+  { href: "#case-1", label: "Case 1: ラジオボタン" },
+  { href: "#case-2", label: "Case 2: ドロワー" },
+  { href: "#case-3", label: "Case 3: ボタン優先度" },
+  { href: "#case-4", label: "Case 4: アイコン付きボタン" },
+];
+---
+
+<nav class="siteNav" aria-label="ページ内ナビゲーション">
+  <div class="container">
+    <ul class="siteNav__list" role="list">
+      {
+        navItems.map((item) => (
+          <li class="siteNav__item">
+            <a class="siteNav__link" href={item.href}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<style lang="scss">
+  .siteNav {
+    position: sticky;
+    top: 0;
+    z-index: $z-nav;
+    background-color: $color-bg;
+    border-bottom: 1px solid $color-border;
+  }
+
+  .container {
+    overflow: hidden;
+    overflow-x: auto;
+    padding: 10px 10px;
+  }
+
+  .siteNav__list {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    height: 100%;
+
+    // Hide scrollbar on mobile
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
+
+  .siteNav__item {
+    flex-shrink: 0;
+  }
+
+  .siteNav__link {
+    display: inline-block;
+    padding: $space-xs $space-sm;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+    text-decoration: none;
+    border-radius: $border-radius-sm;
+    border: 1px solid transparent;
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+    white-space: nowrap;
+
+    &:hover {
+      color: $color-primary;
+      background-color: $color-surface;
+      text-decoration: none;
+    }
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+
+---
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-header__inner">
+      <h1 class="site-header__title">Forced Color Mode Demo</h1>
+      <p class="site-header__lead">
+        Windows のハイコントラストモード（<code>forced-colors: active</code
+        >）で<br />
+        <strong>壊れる UI</strong> と <strong>壊れない UI</strong> を並列比較するデモサイトです。
+      </p>
+      <p class="site-header__note">
+        デジタル庁の記事「<a
+          href="https://digital-agency-news.digital.go.jp/articles/2025-10-14"
+          target="_blank"
+          rel="noopener noreferrer"
+          >デジタル庁デザインシステムの活用例：よくあるアクセシビリティの課題とその解決策</a
+        >」（2025-10-14）の<a
+          href="https://digital-agency-news.digital.go.jp/articles/2025-10-14#index_Cp2WkXm4"
+          target="_blank"
+          rel="noopener noreferrer">強制カラーモードでの閲覧に対応</a
+        >を参考に作成しました。<br />
+        強制カラーモードの有効化手順を参考にして、デモの効果を確認してみてください。
+      </p>
+    </div>
+  </div>
+</header>
+
+<style lang="scss">
+  .site-header {
+    background-color: $color-surface;
+    border-bottom: 1px solid $color-border;
+    padding: $space-5xl 0 $space-2xl;
+  }
+
+  .site-header__inner {
+    max-width: 720px;
+  }
+
+  .site-header__title {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $color-text;
+    margin-bottom: $space-lg;
+
+    @include mobile {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  .site-header__lead {
+    font-size: $font-size-lg;
+    line-height: $line-height-loose;
+    color: $color-text;
+    margin-bottom: $space-md;
+
+    code {
+      font-family: $font-family-mono;
+      font-size: $font-size-base;
+      background-color: $color-surface-alt;
+      padding: 2px $space-xs;
+      border-radius: $border-radius-sm;
+      border: 1px solid $color-border;
+    }
+
+    @media (forced-colors: active) {
+      code {
+        border: 1px solid ButtonText;
+        background-color: Canvas;
+        color: CanvasText;
+        forced-color-adjust: none;
+      }
+    }
+  }
+
+  .site-header__note {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+</style>

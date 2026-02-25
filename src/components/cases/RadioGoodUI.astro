@@ -1,0 +1,138 @@
+---
+const options = [
+  {
+    id: "good-radio-1",
+    value: "option1",
+    label: "標準プラン",
+    description: "月額 ¥980",
+  },
+  {
+    id: "good-radio-2",
+    value: "option2",
+    label: "プレミアムプラン",
+    description: "月額 ¥1,980",
+    checked: true,
+  },
+  {
+    id: "good-radio-3",
+    value: "option3",
+    label: "エンタープライズ",
+    description: "月額 ¥4,980",
+  },
+];
+---
+
+<fieldset class="radio-good">
+  <legend class="radio-good__legend">プランを選択</legend>
+  {
+    options.map((option) => (
+      <label class={"radio-good__item" + (option.checked ? " is-checked" : "")}>
+        <input
+          class="radio-good__input"
+          type="radio"
+          name="plan-good"
+          value={option.value}
+          checked={option.checked}
+        />
+        <span class="radio-good__mark" aria-hidden="true" />
+        <span class="radio-good__label-text">
+          <span class="radio-good__label-name">{option.label}</span>
+          <span class="radio-good__label-desc">{option.description}</span>
+        </span>
+      </label>
+    ))
+  }
+</fieldset>
+
+<style lang="scss">
+  .radio-good {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+
+  .radio-good__legend {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+    margin-bottom: $space-sm;
+  }
+
+  .radio-good__item {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    padding: $space-sm $space-md;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+    &:hover:not(:has(.radio-good__input:checked)) {
+      background-color: $color-surface;
+    }
+  }
+
+  // Good: background-color + border-color で選択状態を表現
+  .radio-good__item:has(.radio-good__input:checked) {
+    background-color: $color-selected-bg;
+    border-color: $color-primary;
+  }
+
+  .radio-good__item:has(.radio-good__input:focus-visible) {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  } 
+  // forced-colors: 選択済み行に outline で確実に伝える（focus 有無に関わらず）
+  @media (forced-colors: active) {
+    .radio-good__item:has(.radio-good__input:focus-visible) {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
+  }
+
+  .radio-good__input {
+    @include visually-hidden;
+  }
+
+  // カスタム円: 外輪 border は forced-colors で ButtonText に変わるため残る
+  .radio-good__mark {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid $color-border-dark;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  // 内側ドット: background-color + transparent border（Good）
+  // forced-colors では border が ButtonText になり → 輪郭として残り選択状態が伝わる
+  .radio-good__item:has(.radio-good__input:checked) .radio-good__mark::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background-color: $color-primary;
+    border: 2px solid transparent;
+    @media (forced-colors: active) {
+      background-color: ButtonText;
+    }
+  }
+
+  .radio-good__label-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .radio-good__label-name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+  }
+
+  .radio-good__label-desc {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+</style>

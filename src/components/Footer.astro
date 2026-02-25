@@ -1,0 +1,143 @@
+---
+
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <section class="site-footer__references">
+      <h2 class="site-footer__references-title">参考リンク</h2>
+      <ul class="site-footer__references-list">
+        <li>
+          <a
+            href="https://digital-agency-news.digital.go.jp/articles/2025-10-14"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <strong
+              >デジタル庁デザインシステムの活用例：よくあるアクセシビリティの課題とその解決策</strong
+            >
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.mitsue.co.jp/knowledge/blog/frontend/202405/17_1401.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            強制カラーモードに対するメディアクエリforced-colorsの使い方 |
+            フロントエンドBlog | ミツエーリンクス
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://smarthr.design/accessibility/low-vision/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            弱視・ロービジョンのユーザーのウェブ利用時の課題 | アクセシビリティ
+            | SmartHR Design System
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://zenn.dev/schktjm/articles/c4239989992d1a"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            アクセシビリティを気にし出したエンジニアへ、強制カラーモードの紹介
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Values/system-color"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            &lt;system-color&gt; - CSS | MDN
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://developer.mozilla.org/ja/docs/Web/CSS/Reference/At-rules/@media/forced-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            forced-colors - CSS | MDN
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Properties/forced-color-adjust"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            forced-color-adjust - CSS | MDN
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+</footer>
+
+<style lang="scss">
+  .site-footer {
+    margin-top: $space-3xl;
+    padding: $space-xl 0 $space-6xl;
+    border-top: 1px solid $color-border;
+    background-color: $color-surface;
+  }
+
+  .site-footer__text {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    text-align: center;
+  }
+
+  .site-footer__text--small {
+    font-size: $font-size-xs;
+    margin-top: $space-xs;
+  }
+
+  .site-footer__references {
+    margin-top: $space-xl;
+    padding-top: $space-lg;
+    border-top: 1px solid $color-border;
+  }
+
+  .site-footer__references-title {
+    font-size: $font-size-sm;
+    font-weight: bold;
+    color: $color-text-muted;
+    text-align: center;
+    margin-bottom: $space-md;
+  }
+
+  .site-footer__references-list {
+    list-style: disc;
+    padding-left: $space-lg;
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+
+    li {
+      font-size: $font-size-xs;
+      text-align: left;
+    }
+
+    a {
+      color: $color-text-muted;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+
+      &:hover {
+        color: $color-text;
+      }
+
+      @media (forced-colors: active) {
+        color: LinkText;
+      }
+    }
+  }
+</style>

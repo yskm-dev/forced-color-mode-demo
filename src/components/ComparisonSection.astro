@@ -1,0 +1,191 @@
+---
+interface Props {
+  caseNumber: number;
+  title: string;
+  description: string;
+  badExplanation: string;
+  goodExplanation: string;
+  badLabel?: string;
+  goodLabel?: string;
+}
+
+const {
+  caseNumber,
+  title,
+  description,
+  badExplanation,
+  goodExplanation,
+  badLabel = "❌ Bad",
+  goodLabel = "✅ Good",
+} = Astro.props;
+
+const sectionId = `case-${caseNumber}`;
+---
+
+<section id={sectionId} class="comparison-section">
+  <div class="container">
+    <div class="comparison-section__header">
+      <span class="comparison-section__case-label">Case {caseNumber}</span>
+      <h2 class="comparison-section__title">{title}</h2>
+      <p class="comparison-section__description">{description}</p>
+    </div>
+
+    <div class="comparison-section__grid">
+      <!-- Bad UI Panel -->
+      <div class="comparison-section__panel comparison-section__panel--bad">
+        <div class="comparison-section__panel-header">
+          <span
+            class="comparison-section__badge comparison-section__badge--bad"
+            aria-label={`${badLabel}: 問題のある実装`}
+          >
+            {badLabel}
+          </span>
+        </div>
+        <div class="comparison-section__panel-body">
+          <slot name="bad" />
+        </div>
+        <p
+          class="comparison-section__explanation comparison-section__explanation--bad"
+        >
+          <span class="comparison-section__explanation-icon" aria-hidden="true"
+            >✗</span
+          >
+          {badExplanation}
+        </p>
+      </div>
+
+      <!-- Good UI Panel -->
+      <div class="comparison-section__panel comparison-section__panel--good">
+        <div class="comparison-section__panel-header">
+          <span
+            class="comparison-section__badge comparison-section__badge--good"
+            aria-label={`${goodLabel}: 推奨される実装`}
+          >
+            {goodLabel}
+          </span>
+        </div>
+        <div class="comparison-section__panel-body">
+          <slot name="good" />
+        </div>
+        <p
+          class="comparison-section__explanation comparison-section__explanation--good"
+        >
+          <span class="comparison-section__explanation-icon" aria-hidden="true"
+            >✓</span
+          >
+          {goodExplanation}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .comparison-section {
+    padding: $space-3xl 0;
+    border-top: 1px solid $color-border;
+  }
+
+  .comparison-section__header {
+    margin-bottom: $space-xl;
+  }
+
+  .comparison-section__case-label {
+    display: inline-block;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-primary;
+    background-color: $color-selected-bg;
+    padding: 2px $space-sm;
+    border-radius: $border-radius-full;
+    margin-bottom: $space-sm;
+    border: 1px solid transparent;
+  }
+
+  .comparison-section__title {
+    font-size: $font-size-2xl;
+    margin-bottom: $space-sm;
+  }
+
+  .comparison-section__description {
+    color: $color-text-muted;
+    max-width: 640px;
+  }
+
+  .comparison-section__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-lg;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .comparison-section__panel {
+    @include card;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comparison-section__panel--bad {
+    border-color: #fca5a5;
+  }
+
+  .comparison-section__panel--good {
+    border-color: #86efac;
+  }
+
+  .comparison-section__panel-header {
+    margin-bottom: $space-md;
+  }
+
+  .comparison-section__badge {
+    display: inline-block;
+    padding: $space-xs $space-md;
+    border-radius: $border-radius-full;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+  }
+
+  .comparison-section__badge--bad {
+    background-color: $color-badge-bad-bg;
+    color: $color-badge-bad-text;
+  }
+
+  .comparison-section__badge--good {
+    background-color: $color-badge-good-bg;
+    color: $color-badge-good-text;
+  }
+
+  .comparison-section__panel-body {
+    flex: 1;
+    margin-bottom: $space-md;
+  }
+
+  .comparison-section__explanation {
+    font-size: $font-size-sm;
+    line-height: $line-height-base;
+    padding: $space-sm $space-md;
+    border-radius: $border-radius-sm;
+    display: flex;
+    gap: $space-sm;
+  }
+
+  .comparison-section__explanation--bad {
+    background-color: #fff1f2;
+    color: #9f1239;
+  }
+
+  .comparison-section__explanation--good {
+    background-color: #f0fdf4;
+    color: #166534;
+  }
+
+  .comparison-section__explanation-icon {
+    flex-shrink: 0;
+    font-weight: $font-weight-bold;
+  }
+</style>
