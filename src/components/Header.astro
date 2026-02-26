@@ -78,5 +78,12 @@
   .site-header__note {
     font-size: $font-size-sm;
     color: $color-text-muted;
+    a {
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
   }
 </style>

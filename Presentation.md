@@ -19,6 +19,7 @@ style: |
   code { display: inline-block; background: #e3e3e3; color: #f04400; font-weight: bold; padding: 2px;}
   .bad  { color: #dc2626; font-weight: bold;}
   .good { color: #16a34a; font-weight: bold; }
+  .center {text-align: center;}
 ---
 
 # 強制カラーモードへの対応
@@ -113,6 +114,10 @@ Macではアクセシビリティのコントラストを変更してもこの�
 ---
 
 ## 🚀 DEMO
+
+![width:700 center](<CleanShot 2026-02-26 at 11.13.13@2x.png>)
+
+[Forced Color Mode Demo - yskm_dev](https://forced-color-mode-demo.yskm.dev/)
 
 ---
 
